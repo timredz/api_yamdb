@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'corsheaders',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,8 @@ REST_FRAMEWORK = {
         'DEFAULT_PERMISSION_CLASSES': [
             'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         ],
+        'DEFAULT_FILTER_BACKENDS': [
+            'django_filters.rest_framework.DjangoFilterBackend'],
     }
 
 CORS_ORIGIN_ALLOW_ALL = True
