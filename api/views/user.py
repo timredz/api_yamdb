@@ -2,12 +2,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from .utils import email_is_valid, send_email
+from api.utils import email_is_valid, send_email
 from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework import filters, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from .permissions import IsAdmin
-from .serializers import (UserSerializer)
+from api.permissions import IsAdmin
+from api.serializers.user import UserSerializer
 
 
 User = get_user_model()
