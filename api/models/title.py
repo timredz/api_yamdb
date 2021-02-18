@@ -13,6 +13,7 @@ class Title(models.Model):
         verbose_name="Год выпуска"
     )
     description = models.TextField(
+        blank=True,
         verbose_name='Описание',
     )
     genre = models.ManyToManyField(
@@ -31,6 +32,7 @@ class Title(models.Model):
         verbose_name="Категория",
     )
     rating = models.IntegerField(
+        blank=True,
         verbose_name="Рейтинг"
     )
 
