@@ -31,6 +31,7 @@ class Title(models.Model):
         verbose_name="Категория",
     )
     rating = models.IntegerField(
+        blank=True,
         verbose_name="Рейтинг"
     )
 
