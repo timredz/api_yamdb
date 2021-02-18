@@ -6,4 +6,3 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ("username", "email", "role")
 
 admin.site.register(User, UserAdmin)
-
