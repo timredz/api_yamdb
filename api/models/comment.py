@@ -10,17 +10,13 @@ class Comment(models.Model):
         db_index=True,
         primary_key=True
     )
-    text = models.ForeignKey(
-        Review,
-        on_delete=models.CASCADE,
-        related_name="reviews",
+    text = models.TextField(
         verbose_name="Текст комментария",
-        help_text='Оставте свой комментарий'
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="reviews",
+        related_name="comments",
         verbose_name="username автора комментария"
     )
     pub_date = models.DateTimeField(
