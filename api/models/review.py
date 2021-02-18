@@ -11,12 +11,8 @@ class Review(models.Model):
         db_index=True,
         primary_key=True
     )
-    text = models.ForeignKey(
-        Title,
-        on_delete=models.CASCADE,
-        related_name="reviews",
+    text = models.TextField(
         verbose_name="Текст отзыва",
-        help_text='Добавте свой отзыв'
     )
     author = models.ForeignKey(
         User,
