@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.tokens import default_token_generator
-from django.shortcuts import get_object_or_404
+from django.utils.crypto import get_random_string
 from rest_framework.response import Response
 from api.utils import email_is_valid, send_email
 from rest_framework.decorators import action, api_view, permission_classes
@@ -8,10 +7,10 @@ from rest_framework import filters, viewsets
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from api.permissions import IsAdmin
 from api.serializers.user import UserSerializer
+from api.models import UnconfirmedUser
 
 
 User = get_user_model()
-
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -24,12 +23,12 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(methods=['patch', 'get'], detail=False,
             permission_classes=[IsAuthenticated],
             url_path='me', url_name='me')
-    def me(self, request, *args, **kwargs):
-        instance = self.request.user
-        serializer = self.get_serializer(instance)
+    def me(self, request):
+        user = request.user
+        serializer = self.get_serializer(user)
         if self.request.method == 'PATCH':
             serializer = self.get_serializer(
-                instance, data=request.data, partial=True)
+                user, data=request.data, partial=True)
             serializer.is_valid()
             serializer.save()
         return Response(serializer.data)
@@ -44,14 +43,13 @@ def send_confirmation_code(request):
         message = 'Email is required'
     else:
         if email_is_valid(email):
-            user = get_object_or_404(User, email=email)
-            print('--->', email, user)
-            confirmation_code = default_token_generator.make_token(user)
-
+            confirmation_code = get_random_string(length=30)
+            UnconfirmedUser.objects.update_or_create(
+                email=email,
+                defaults={'confirmation_code': confirmation_code}
+            )
             send_email(email, confirmation_code)
-            user.confirmation_code = confirmation_code
             message = email
-            user.save()
         else:
             message = 'Valid email is required'
     return Response({'email': message})
