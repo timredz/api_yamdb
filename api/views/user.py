@@ -21,7 +21,8 @@ class UserViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['username', ]
 
-    @action(methods=['patch', 'get'], detail=False,
+    @action(methods=['patch', 'get'],
+            detail=False,
             permission_classes=[IsAuthenticated],
             url_path='me', url_name='me')
     def me(self, request, *args, **kwargs):
