@@ -6,7 +6,7 @@ from .user import User
 
 class Comment(models.Model):
     id = models.ForeignKey(
-        User,
+        Review,
         on_delete=models.CASCADE,
         related_name="comments",
         verbose_name="ID комментария"
