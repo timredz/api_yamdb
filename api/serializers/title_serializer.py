@@ -13,7 +13,7 @@ class TitleSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         many=True
     )
-    rating = serializers.SerializerMethodField(method_name=None)
+    rating = serializers.SerializerMethodField()
     category = CategorySerializer(read_only=True)
 
     class Meta:
@@ -21,13 +21,17 @@ class TitleSerializer(serializers.ModelSerializer):
         model = Title
 
     def get_rating(self, obj):
-        title = get_object_or_404(Title, pk=self.initial_data['title_id'])
-        reviews = title.reviews.all()
-        for review in reviews:
-            if review.count():
-                score_avg = (sum(review.score)) / review.count()
-                return score_avg
+        reviews = obj.reviews.all()
+        count = len(reviews)
+        if count == 0:
             return None
+        else:
+            score_sum = 0
+            for review in reviews:
+                score_sum += review.score
+            rating = round(score_sum/count)
+            return rating
+
 
 
 
