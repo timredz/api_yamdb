@@ -6,11 +6,10 @@ from .user import User
 
 
 class Review(models.Model):
-    id = models.ForeignKey(
-        Title,
-        on_delete=models.CASCADE,
-        related_name="reviews",
-        verbose_name="ID отзыва"
+    id = models.IntegerField(
+        "ID отзыва",
+        db_index=True,
+        primary_key=True
     )
     text = models.TextField(
         verbose_name="Текст отзыва",

@@ -5,11 +5,10 @@ from .user import User
 
 
 class Comment(models.Model):
-    id = models.ForeignKey(
-        Review,
-        on_delete=models.CASCADE,
-        related_name="comments",
-        verbose_name="ID комментария"
+    id = models.IntegerField(
+        "ID комментария",
+        db_index=True,
+        primary_key=True
     )
     text = models.TextField(
         verbose_name="Текст комментария",
