@@ -5,7 +5,12 @@ from .user import User
 
 
 class Comment(models.Model):
-    id = models.ForeignKey(
+    id = models.IntegerField(
+        "ID комментария",
+        db_index=True,
+        primary_key=True
+    )
+    review_id = models.ForeignKey(
         Review,
         on_delete=models.CASCADE,
         related_name="comments",
