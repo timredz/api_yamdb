@@ -22,3 +22,4 @@ data/
 api/migrations
 
 db.sqlite3
+migrations/*
