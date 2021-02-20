@@ -2,11 +2,17 @@ from django.db import models
 
 from .title import Title
 from .user import User
+from .review import Review
 
 
 class Comment(models.Model):
-    title = models.ForeignKey(
-        Title,
+    id = models.IntegerField(
+        "ID комментария",
+        db_index=True,
+        primary_key=True
+    )
+    review = models.ForeignKey(
+        Review,
         on_delete=models.CASCADE,
         related_name="comments",
         verbose_name="id публикации",
