@@ -1,12 +1,11 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views.user import UserViewSet, send_confirmation_code
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from api.views import CategoryViewSet, GenreViewSet, TitleViewSet
 
 from .serializers.user import EmailAuthSerializer
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView
-)
+from .views.user import UserViewSet, send_confirmation_code
 
 v1_router = DefaultRouter()
 v1_router.register(r'users', UserViewSet)

@@ -4,12 +4,12 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
-        (1, 'user'),
-        (2, 'moderator'),
-        (3, 'admin')
+        ('user', 'user'),
+        ('moderator', 'moderator'),
+        ('admin', 'admin')
     )
 
-    role = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, default=1)
+    role = models.CharField(choices=USER_TYPE_CHOICES, default='user', max_length=10)
 
     email = models.EmailField(
         verbose_name='email address',
@@ -20,6 +20,9 @@ class User(AbstractUser):
     bio = models.TextField(blank=True)
 
     REQUIRED_FIELDS = ['email']
+
+    class Meta:
+        ordering = ['-id']
 
     def __str__(self):
         return self.email
