@@ -4,12 +4,13 @@ from rest_framework import filters
 
 from api.models import Title, Genre, Category
 from api.serializers import TitleSerializer
+from api.permissions import IsAdmin, IsGetOrIsAdmin
 
 
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
     serializer_class = TitleSerializer
-    permission_classes = ()
+    permission_classes = [IsGetOrIsAdmin]
     filter_backends = [filters.SearchFilter]
     filterset_fields = ['name', 'year', 'genre__slug', 'category__slug']
 

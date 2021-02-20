@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 from api.models import Genre
-from api.permissions import IsAdmin
+from api.permissions import IsAdmin, IsGetOrIsAdmin
 from api.serializers import GenreSerializer
 
 
@@ -14,7 +14,7 @@ class GenreViewSet(mixins.CreateModelMixin,
                    viewsets.GenericViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly | IsAdmin]
+    permission_classes = [IsGetOrIsAdmin]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
     lookup_field = 'slug'
