@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
+
 from api.models import UnconfirmedUser
 
 User = get_user_model()
@@ -13,7 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'last_name', 'username',
                   'bio', 'role', 'email')
         model = User
-
 
 
 class EmailAuthSerializer(serializers.Serializer):
@@ -30,5 +30,6 @@ class EmailAuthSerializer(serializers.Serializer):
             )
             token = RefreshToken.for_user(user)
             return {
-                'token': str(token.access_token),
+                'access': str(token.access_token),
+                'refresh': str(token)
             }
