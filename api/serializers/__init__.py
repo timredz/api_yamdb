@@ -1,3 +1,3 @@
-from .category_serialaizer import CategorySerializer
-from .genre_serializer import GenreSerializer
-from .title_serializer import TitleSerializer
+from .category import CategorySerializer
+from .genre import GenreSerializer
+from .title import TitleSerializer
