@@ -13,5 +13,8 @@ class Category(models.Model):
         help_text='Не более 40 символов',
     )
 
+    class Meta:
+        ordering = ('name',)
+
     def __str__(self):
         return f'{self.name[:15]} '

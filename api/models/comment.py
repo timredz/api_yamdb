@@ -1,14 +1,15 @@
 from django.db import models
 
-from .review import Review
+from .title import Title
 from .user import User
 
 
 class Comment(models.Model):
-    id = models.IntegerField(
-        "ID комментария",
-        db_index=True,
-        primary_key=True
+    title = models.ForeignKey(
+        Title,
+        on_delete=models.CASCADE,
+        related_name="comments",
+        verbose_name="id публикации",
     )
     text = models.TextField(
         verbose_name="Текст комментария",
