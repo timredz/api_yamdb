@@ -1,13 +1,11 @@
-from api.views.review_views import ReviewViewSet
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from .views.user import UserViewSet, send_confirmation_code
-from api.views import CategoryViewSet, GenreViewSet, TitleViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers.user import EmailAuthSerializer
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView
-)
+from .views import (CategoryViewSet, CommentViewSet, GenreViewSet,
+                    ReviewViewSet, TitleViewSet)
+from .views.user import UserViewSet, send_confirmation_code
 
 v1_router = DefaultRouter()
 v1_router.register(r'users', UserViewSet)
@@ -19,6 +17,12 @@ v1_router.register(
     ReviewViewSet,
     basename='reviews'
 )
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments/',
+    CommentViewSet,
+    basename='comments'
+)
+
 
 urlpatterns = [
     path('v1/auth/email/', send_confirmation_code),

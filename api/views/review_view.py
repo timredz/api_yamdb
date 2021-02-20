@@ -12,10 +12,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     permission_classes = (IsAuthenticatedOrReadOnly)
-
     pagination_class = PageNumberPagination
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['name', 'year', 'genre__slug', 'category__slug']
+    http_method_names = ('GET', 'POST')
 
     def get_queryset(self):
         title = get_object_or_404(Title, pk=self.kwargs.get("title_id"))
