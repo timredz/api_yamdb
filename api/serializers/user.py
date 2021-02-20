@@ -15,6 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
 
 
+
 class EmailAuthSerializer(serializers.Serializer):
     email = serializers.EmailField()
     confirmation_code = serializers.CharField(max_length=100)

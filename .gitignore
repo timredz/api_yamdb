@@ -2,6 +2,8 @@
 env/
 venv/
 
+.env
+
 __pycache__/
 *.py[cod]
 
@@ -15,6 +17,9 @@ __pycache__/
 *.sublime-workspace
 
 media/
+data/
+
+api/migrations
 
 db.sqlite3
 migrations/*
