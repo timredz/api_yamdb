@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers.user import EmailAuthSerializer
 from .views import (CategoryViewSet, CommentViewSet, GenreViewSet,
-                    ReviewViewSet, TitleViewSet)
+                    ReviewViewSet, TitleViewSet, Review_IDViewSet)
 from .views.user import UserViewSet, send_confirmation_code
 
 v1_router = DefaultRouter()
@@ -16,6 +16,11 @@ v1_router.register(
     r'titles/(?P<title_id>\d+)/reviews',
     ReviewViewSet,
     basename='reviews'
+)
+v1_router.register(
+    r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)',
+    Review_IDViewSet,
+    basename='reviews_id'
 )
 v1_router.register(
     r'titles/(?P<title_id>\d+)/reviews/(?P<review_id>\d+)/comments/',
