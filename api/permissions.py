@@ -20,3 +20,14 @@ class IsAuthorOrReadOnly(BasePermission):
         if request.method in SAFE_METHODS:
             return True
         return obj.author == request.user
+
+
+class IsGetOrIsAdmin(BasePermission):
+
+    def has_permission(self, request, view):
+        if request.method == 'GET':
+            return True
+        if request.user.is_authenticated:
+            if request.user.role in ('admin',):
+                return True
+        return False
