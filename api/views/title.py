@@ -17,4 +17,3 @@ class TitleViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         category = get_object_or_404(Category, slug=self.request.data['category'])
         serializer.save(category=category)
-

@@ -6,7 +6,7 @@ from .user import User
 
 
 class Review(models.Model):
-
+    id = models.IntegerField("ID  отзыва", primary_key=True)
     title = models.ForeignKey(
         Title,
         on_delete=models.CASCADE,
@@ -35,3 +35,12 @@ class Review(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ['-pub_date']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['author', 'title'],
+                name='unique_review'
+            ),
+        ]
