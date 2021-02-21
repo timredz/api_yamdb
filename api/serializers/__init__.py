@@ -1,5 +1,5 @@
-from .comment import CommentSerializer
-from .review import ReviewSerializer
 from .category import CategorySerializer
+from .comment import CommentSerializer
 from .genre import GenreSerializer
-from .title import TitleSerializerPost, TitleSerializerGet
+from .review import ReviewSerializer
+from .title import TitleSerializerGet, TitleSerializerPost

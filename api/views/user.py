@@ -1,14 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.utils.crypto import get_random_string
-from rest_framework.response import Response
-from api.utils import email_is_valid, send_email
-from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework import filters, viewsets
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+
+from api.models import UnconfirmedUser
 from api.permissions import IsAdmin
 from api.serializers.user import UserSerializer
-from api.models import UnconfirmedUser
-
+from api.utils import email_is_valid, send_email
 
 User = get_user_model()
 

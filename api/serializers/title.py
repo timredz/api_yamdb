@@ -1,7 +1,6 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
-from api.models import Title, Genre, Category
+from api.models import Category, Genre, Title
 from api.serializers import CategorySerializer, GenreSerializer
 
 
@@ -46,9 +45,3 @@ class TitleSerializerGet(serializers.ModelSerializer):
                 score_sum += review.score
             rating = round(score_sum/count)
             return rating
-
-
-
-
-
-

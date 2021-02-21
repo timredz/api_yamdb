@@ -1,4 +1,3 @@
-from django.db.models.fields import SlugField
 from rest_framework import serializers
 
 from api.models import Review
