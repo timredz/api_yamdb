@@ -12,6 +12,7 @@ from api.utils import email_is_valid, send_email
 
 User = get_user_model()
 
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [IsAdminUser | IsAdmin]
@@ -33,7 +34,6 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.is_valid()
             serializer.save()
         return Response(serializer.data)
-
 
 
 @api_view(['POST'])

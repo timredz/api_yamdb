@@ -16,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
 
 
-
 class EmailAuthSerializer(serializers.Serializer):
     email = serializers.EmailField()
     confirmation_code = serializers.CharField(max_length=100)
@@ -31,5 +30,6 @@ class EmailAuthSerializer(serializers.Serializer):
             )
             token = RefreshToken.for_user(user)
             return {
-                'token': str(token.access_token),
+                'access': str(token.access_token),
+                'refresh': str(token)
             }

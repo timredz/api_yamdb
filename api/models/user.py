@@ -9,7 +9,11 @@ class User(AbstractUser):
         ('admin', 'admin')
     )
 
-    role = models.CharField(choices=USER_TYPE_CHOICES, default='user', max_length=10)
+    role = models.CharField(
+        choices=USER_TYPE_CHOICES,
+        default='user',
+        max_length=10
+    )
 
     email = models.EmailField(
         verbose_name='email address',
