@@ -1,19 +1,20 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, permissions
-from rest_framework import filters
+from django_filters import rest_framework as filters
+from rest_framework import viewsets
 
-from api.models import Title, Genre, Category
-from api.serializers import TitleSerializer
-from api.permissions import IsAdmin, IsGetOrIsAdmin
+from api.filter import TitleFilter
+from api.models import Title
+from api.permissions import IsGetOrIsAdmin
+from api.serializers import TitleSerializerGet, TitleSerializerPost
 
 
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
-    serializer_class = TitleSerializer
     permission_classes = [IsGetOrIsAdmin]
-    filter_backends = [filters.SearchFilter]
-    filterset_fields = ['name', 'year', 'genre__slug', 'category__slug']
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = TitleFilter
 
-    def perform_create(self, serializer):
-        category = get_object_or_404(Category, slug=self.request.data['category'])
-        serializer.save(category=category)
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return TitleSerializerGet
+        else:
+            return TitleSerializerPost

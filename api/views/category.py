@@ -1,9 +1,7 @@
-from rest_framework import viewsets, permissions
-from rest_framework import filters, mixins
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import filters, mixins, viewsets
 
 from api.models import Category
-from api.permissions import IsAdmin, IsGetOrIsAdmin
+from api.permissions import IsGetOrIsAdmin
 from api.serializers import CategorySerializer
 
 
