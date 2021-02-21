@@ -10,7 +10,7 @@ from api.permissions import IsAdmin, IsGetOrIsAdmin
 class TitleViewSet(viewsets.ModelViewSet):
     queryset = Title.objects.all()
     serializer_class = TitleSerializer
-    permission_classes = [IsGetOrIsAdmin]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter]
     filterset_fields = ['name', 'year', 'genre__slug', 'category__slug']
 

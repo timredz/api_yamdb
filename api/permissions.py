@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 User = get_user_model()
 
@@ -14,12 +14,10 @@ class IsAdmin(BasePermission):
         return False
 
 
-class IsGetOrIsAdmin(BasePermission):
 
+class IsGetOrIsAdmin(BasePermission):
     def has_permission(self, request, view):
-        if request.method == 'GET':
+        if request.method in SAFE_METHODS:
             return True
-        if request.user.is_authenticated:
-            if request.user.role in ('admin',):
-                return True
-        return False
+        else:
+            return request.user.is_staff
