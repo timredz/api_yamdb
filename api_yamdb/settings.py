@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta
+
 from dotenv import load_dotenv
 
 
@@ -115,7 +117,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
 
 REST_FRAMEWORK = {
-
         'DEFAULT_PERMISSION_CLASSES': [
             'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         ],
@@ -129,8 +130,7 @@ REST_FRAMEWORK = {
 
         'DEFAULT_PAGINATION_CLASS':
             'rest_framework.pagination.PageNumberPagination',
-        'PAGE_SIZE': 20
-
+        'PAGE_SIZE': 20,
     }
 
 AUTH_USER_MODEL = 'api.User'
@@ -144,3 +144,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_URLS_REGEX = r'^/api/.*$'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
+    }
