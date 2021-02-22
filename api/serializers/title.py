@@ -38,4 +38,4 @@ class TitleSerializerGet(serializers.ModelSerializer):
     def get_rating(self, obj):
         if len(obj.reviews.all()) == 0:
             return None
-        return obj.reviews.aggregate(round(Avg('score')))
+        return obj.reviews.aggregate(Avg('score'))['score__avg']

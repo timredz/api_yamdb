@@ -1,5 +1,6 @@
 from django_filters import rest_framework as filters
 from rest_framework import viewsets
+from django.db.models import Avg
 
 from api.filter import TitleFilter
 from api.models import Title
