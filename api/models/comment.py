@@ -6,11 +6,6 @@ from .user import User
 
 
 class Comment(models.Model):
-    id = models.IntegerField(
-        "ID комментария",
-        db_index=True,
-        primary_key=True
-    )
     review = models.ForeignKey(
         Review,
         on_delete=models.CASCADE,

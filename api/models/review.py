@@ -6,7 +6,6 @@ from .user import User
 
 
 class Review(models.Model):
-    id = models.IntegerField("ID отзыва", primary_key=True)
     title = models.ForeignKey(
         Title,
         on_delete=models.CASCADE,
