@@ -15,5 +15,6 @@ class TitleViewSet(viewsets.ModelViewSet):
     filterset_fields = ['name', 'year', 'genre__slug', 'category__slug']
 
     def perform_create(self, serializer):
-        category = get_object_or_404(Category, slug=self.request.data['category'])
+        # category = get_object_or_404(Category, slug=self.request.data['category'])
+        category = get_object_or_404(Category, slug=self.kwargs.get("category"))
         serializer.save(category=category)

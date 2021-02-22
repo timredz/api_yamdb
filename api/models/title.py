@@ -5,6 +5,7 @@ from .genre import Genre
 
 
 class Title(models.Model):
+    id = models.IntegerField("ID произведения", primary_key=True)
     name = models.CharField(
         verbose_name='Произведение',
         max_length=100,

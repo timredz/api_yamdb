@@ -31,10 +31,3 @@ class TitleSerializer(serializers.ModelSerializer):
                 score_sum += review.score
             rating = round(score_sum/count)
             return rating
-
-
-
-
-
-
-

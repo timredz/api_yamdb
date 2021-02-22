@@ -1,18 +1,18 @@
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from api.models import Review, Title
 from api.serializers import ReviewSerializer
-from api.permissions import IsAuthorOrIsAdminOrReadOnly
+from api.permissions import IsAuthorOrIsAdminOrReadOnly, IsGetOrIsAdmin
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-    pagination_class = PageNumberPagination
+    permission_classes = (IsAuthenticated)
+    # pagination_class = PageNumberPagination
     http_method_names = ('GET', 'POST')
 
     def get_queryset(self):
