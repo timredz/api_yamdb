@@ -1,11 +1,10 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
-from api.models import Title, Genre, Category
-from api.serializers import CategorySerializer
+from api.models import Category, Genre, Title
+from api.serializers import CategorySerializer, GenreSerializer
 
 
-class TitleSerializer(serializers.ModelSerializer):
+class TitleSerializerPost(serializers.ModelSerializer):
 
     genre = serializers.SlugRelatedField(
         slug_field='slug',
@@ -13,6 +12,21 @@ class TitleSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault(),
         many=True
     )
+
+    category = serializers.SlugRelatedField(
+        slug_field='slug',
+        queryset=Category.objects.all(),
+        default=CategorySerializer(),
+    )
+
+    class Meta:
+        fields = '__all__'
+        model = Title
+
+
+class TitleSerializerGet(serializers.ModelSerializer):
+
+    genre = GenreSerializer(many=True)
     rating = serializers.SerializerMethodField()
     category = CategorySerializer(read_only=True)
 
