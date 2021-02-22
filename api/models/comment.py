@@ -1,16 +1,10 @@
 from django.db import models
 
 from .review import Review
-from .title import Title
 from .user import User
 
 
 class Comment(models.Model):
-    id = models.IntegerField(
-        "ID комментария",
-        db_index=True,
-        primary_key=True
-    )
     review = models.ForeignKey(
         Review,
         on_delete=models.CASCADE,
@@ -28,9 +22,11 @@ class Comment(models.Model):
     )
     pub_date = models.DateTimeField(
         "Дата публикации комментария",
-        auto_now_add=True,
-        db_index=True
+        auto_now_add=True
     )
+
+    class Meta:
+        ordering = ['-pub_date']
 
     def __str__(self):
         return self.text

@@ -1,38 +1,27 @@
 from rest_framework import serializers
-
-from api.models import Review, Title
-
-
-# class CurrentTitleDefault:
-#    requires_context = True
-#
-#    def __call__(self, serializer_field):
-#        print(serializer_field.context['request'])
+from api.models import Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='username'
+        slug_field='username',
+        read_only=True
     )
-    title = serializers.SlugRelatedField(
-#        default=serializers.CurrentTitltDefault(),
-        queryset=Title.objects.all(),
-        slug_field='name'
-    )
-
-    def validate(self, data):
-        score = data['score']
-        if score <= 0 or score > 10:
-            raise serializers.ValidationError(
-                'Оценка должна быть от 1 to 10'
-            )
-        return data
 
     class Meta:
-        fields = '__all__'
+        fields = ('id', 'text', 'author', 'score', 'pub_date')
         model = Review
-        validators = [serializers.UniqueTogetherValidator(
-            queryset=Review.objects.all(),
-            fields=['title', 'author']
-        )]
+
+    def validate(self, data):
+        if self.context['request'].method not in ('POST'):
+            return data
+
+        user = self.context['request'].user
+        title_id = (
+            self.context['request'].parser_context['kwargs']['title_id']
+        )
+        if Review.objects.filter(author=user, title__id=title_id).exists():
+            raise serializers.ValidationError(
+                "Review already exists"
+            )
+        return data
