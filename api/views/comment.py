@@ -1,7 +1,7 @@
 from rest_framework.generics import get_object_or_404
 
 from api.mixins import CustomMixin
-from api.models import Review, Comment
+from api.models import Comment, Review
 from api.models.title import Title
 from api.serializers import CommentSerializer
 
