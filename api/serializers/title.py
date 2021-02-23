@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from rest_framework import serializers
 
 from api.models import Category, Genre, Title
@@ -35,13 +36,6 @@ class TitleSerializerGet(serializers.ModelSerializer):
         model = Title
 
     def get_rating(self, obj):
-        reviews = obj.reviews.all()
-        count = len(reviews)
-        if count == 0:
+        if len(obj.reviews.all()) == 0:
             return None
-        else:
-            score_sum = 0
-            for review in reviews:
-                score_sum += review.score
-            rating = round(score_sum/count)
-            return rating
+        return obj.reviews.aggregate(Avg('score'))['score__avg']
