@@ -3,4 +3,11 @@ from .comment import CommentViewSet
 from .genre import GenreViewSet
 from .title import TitleViewSet
 from .review import ReviewViewSet
-from .comment import CommentViewSet
+
+__all__ = [
+    'CategoryViewSet',
+    'CommentViewSet',
+    'GenreViewSet',
+    'TitleViewSet',
+    'ReviewViewSet'
+]
