@@ -5,3 +5,14 @@ from .review import Review
 from .title import GenreTitleRelations, Title
 from .unconfirmed_user import UnconfirmedUser
 from .user import User
+
+__all__ = [
+    'Category',
+    'Comment',
+    'Genre',
+    'Review',
+    'Title',
+    'GenreTitleRelations',
+    'UnconfirmedUser',
+    'User',
+]

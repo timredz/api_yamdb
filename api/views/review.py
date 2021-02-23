@@ -1,9 +1,8 @@
 from rest_framework.generics import get_object_or_404
-from api.mixins import CustomMixin
 
+from api.mixins import CustomMixin
 from api.models import Title
 from api.serializers import ReviewSerializer
-
 
 
 class ReviewViewSet(CustomMixin):
