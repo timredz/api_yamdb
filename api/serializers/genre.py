@@ -6,5 +6,5 @@ from api.models import Genre
 class GenreSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('name', 'slug')
+        exclude = ('id',)
         model = Genre

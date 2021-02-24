@@ -6,5 +6,5 @@ from api.models import Category
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('name', 'slug')
+        exclude = ('id',)
         model = Category

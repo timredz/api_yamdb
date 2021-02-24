@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import AllowAny
 
 from .permissions import IsAdmin, IsModerator, IsOwner, IsUser
@@ -17,3 +17,9 @@ class CustomMixin(viewsets.ModelViewSet):
     def get_permissions(self):
         return [permission()
                 for permission in self.permission_types_dict.get(self.action)]
+
+
+class CreateListDestroyMixin(mixins.CreateModelMixin,
+                             mixins.ListModelMixin,
+                             mixins.DestroyModelMixin):
+    pass

@@ -2,6 +2,7 @@ from django.db import models
 
 from .category import Category
 from .genre import Genre
+from ..validators import year_validator
 
 
 class Title(models.Model):
@@ -10,7 +11,8 @@ class Title(models.Model):
         max_length=100,
     )
     year = models.IntegerField(
-        verbose_name="Год выпуска"
+        verbose_name="Год выпуска",
+        validators=[year_validator],
     )
     description = models.TextField(
         blank=True,
@@ -18,7 +20,7 @@ class Title(models.Model):
     )
     genre = models.ManyToManyField(
         Genre,
-        through='GenreTitleRelations',
+        through='GenreTitleRelation',
         blank=True,
         related_name='titles',
         verbose_name="Жанр",
@@ -39,7 +41,7 @@ class Title(models.Model):
         return f'{self.name[:15]} {self.year} '
 
 
-class GenreTitleRelations(models.Model):
+class GenreTitleRelation(models.Model):
     genre = models.ForeignKey(
         Genre,
         null=True,
