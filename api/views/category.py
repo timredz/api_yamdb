@@ -1,13 +1,12 @@
 from rest_framework import filters, mixins, viewsets
 
+from api.mixins import CreateListDestroyMixin
 from api.models import Category
 from api.permissions import IsGetOrIsAdmin
 from api.serializers import CategorySerializer
 
 
-class CategoryViewSet(mixins.CreateModelMixin,
-                      mixins.ListModelMixin,
-                      mixins.DestroyModelMixin,
+class CategoryViewSet(CreateListDestroyMixin,
                       viewsets.GenericViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer

@@ -1,13 +1,12 @@
 from rest_framework import filters, mixins, viewsets
 
+from api.mixins import CreateListDestroyMixin
 from api.models import Genre
 from api.permissions import IsGetOrIsAdmin
 from api.serializers import GenreSerializer
 
 
-class GenreViewSet(mixins.CreateModelMixin,
-                   mixins.ListModelMixin,
-                   mixins.DestroyModelMixin,
+class GenreViewSet(CreateListDestroyMixin,
                    viewsets.GenericViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
