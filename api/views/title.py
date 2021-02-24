@@ -9,7 +9,9 @@ from api.serializers import TitleSerializerGet, TitleSerializerPost
 
 
 class TitleViewSet(viewsets.ModelViewSet):
-    queryset = Title.objects.all()
+    queryset = Title.objects.annotate(rating=Avg('reviews__score')).order_by(
+        'name')
+    # queryset = Title.objects.all()
     permission_classes = [IsGetOrIsAdmin]
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = TitleFilter
