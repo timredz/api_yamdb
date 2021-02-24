@@ -1,11 +1,11 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from .title import Title
 from .user import User
 
 
 class Review(models.Model):
-    SCORE = zip(range(1, 11), range(1, 11))
     title = models.ForeignKey(
         Title,
         on_delete=models.CASCADE,
@@ -21,13 +21,15 @@ class Review(models.Model):
         related_name="reviews",
         verbose_name="username пользователя"
     )
-    score = models.IntegerField(
-        choices=SCORE,
+    score = models.PositiveSmallIntegerField(
+        validators=(MinValueValidator(1), MaxValueValidator(10)),
         default=1,
-        help_text='Добавте свою оценку (от 1 до 10)'
+        verbose_name="Оценка",
+        help_text="Добавте свою оценку (от 1 до 10)"
     )
     pub_date = models.DateTimeField(
-        "Дата публикации отзыва",
+        verbose_name="Дата публикации отзыва",
+        db_index=True,
         auto_now_add=True
     )
 
