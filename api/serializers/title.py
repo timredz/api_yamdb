@@ -26,16 +26,10 @@ class TitleSerializerPost(serializers.ModelSerializer):
 
 
 class TitleSerializerGet(serializers.ModelSerializer):
-
+    rating = serializers.FloatField(read_only=True)
     genre = GenreSerializer(many=True)
-    rating = serializers.SerializerMethodField()
     category = CategorySerializer(read_only=True)
 
     class Meta:
         fields = '__all__'
         model = Title
-
-    def get_rating(self, obj):
-        if len(obj.reviews.all()) == 0:
-            return None
-        return obj.reviews.aggregate(Avg('score'))['score__avg']
