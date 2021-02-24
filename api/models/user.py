@@ -3,11 +3,15 @@ from django.db import models
 
 
 class User(AbstractUser):
-    USER_TYPE_CHOICES = (
-        ('user', 'user'),
-        ('moderator', 'moderator'),
-        ('admin', 'admin')
-    )
+    USER = 'user'
+    MODERATOR = 'moderator'
+    ADMIN = 'admin'
+
+    USER_TYPE_CHOICES = [
+        (USER, 'user'),
+        (MODERATOR, 'moderator'),
+        (ADMIN, 'admin')
+    ]
 
     role = models.CharField(
         choices=USER_TYPE_CHOICES,

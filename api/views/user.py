@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.utils.crypto import get_random_string
 from rest_framework import filters, viewsets
 from rest_framework.decorators import action, api_view, permission_classes
@@ -31,7 +32,8 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.request.method == 'PATCH':
             serializer = self.get_serializer(
                 user, data=request.data, partial=True)
-            serializer.is_valid()
+            if not serializer.is_valid():
+                raise ValidationError(serializer.errors)
             serializer.save()
         return Response(serializer.data)
 

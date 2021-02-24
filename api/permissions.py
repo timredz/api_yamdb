@@ -1,11 +1,10 @@
-from django.contrib.auth import get_user_model
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 
-# User = get_user_model()
+from api.models.user import User
 
 
 class IsUser(BasePermission):
-    allowed_user_roles = ('user', )
+    allowed_user_roles = User.USER
 
     def has_permission(self, request, view):
         if request.user.is_authenticated:
@@ -15,7 +14,7 @@ class IsUser(BasePermission):
 
 
 class IsModerator(BasePermission):
-    allowed_user_roles = ('moderator', )
+    allowed_user_roles = User.MODERATOR
 
     def has_permission(self, request, view):
         if request.user.is_authenticated:
@@ -33,7 +32,7 @@ class IsOwner(BasePermission):
 
 
 class IsAdmin(BasePermission):
-    allowed_user_roles = ('admin',)
+    allowed_user_roles = User.ADMIN
 
     def has_permission(self, request, view):
         if request.user.is_authenticated:
