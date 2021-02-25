@@ -19,10 +19,10 @@ __pycache__/
 media/
 data/
 
-#api/migrations
-#api/migrations/
-#api/migrations/*
-#migrations/
-#migrations/*
+api/migrations
+api/migrations/
+api/migrations/*
+migrations/
+migrations/*
 
 db.sqlite3
