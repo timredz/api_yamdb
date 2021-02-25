@@ -21,5 +21,6 @@ class CustomMixin(viewsets.ModelViewSet):
 
 class CreateListDestroyMixin(mixins.CreateModelMixin,
                              mixins.ListModelMixin,
-                             mixins.DestroyModelMixin):
+                             mixins.DestroyModelMixin,
+                             viewsets.GenericViewSet):
     pass

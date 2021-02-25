@@ -6,8 +6,7 @@ from api.permissions import IsGetOrIsAdmin
 from api.serializers import GenreSerializer
 
 
-class GenreViewSet(CreateListDestroyMixin,
-                   viewsets.GenericViewSet):
+class GenreViewSet(CreateListDestroyMixin):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     permission_classes = [IsGetOrIsAdmin]

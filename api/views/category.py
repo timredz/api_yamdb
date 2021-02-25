@@ -6,8 +6,7 @@ from api.permissions import IsGetOrIsAdmin
 from api.serializers import CategorySerializer
 
 
-class CategoryViewSet(CreateListDestroyMixin,
-                      viewsets.GenericViewSet):
+class CategoryViewSet(CreateListDestroyMixin):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsGetOrIsAdmin]
