@@ -1,4 +1,4 @@
-from rest_framework import filters, mixins, viewsets
+from rest_framework import filters, viewsets
 
 from api.mixins import CreateListDestroyMixin
 from api.models import Category
