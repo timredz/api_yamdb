@@ -32,5 +32,9 @@ class User(AbstractUser):
     class Meta:
         ordering = ['-id']
 
+    @property
+    def role(self):
+        return self.role
+
     def __str__(self):
         return self.email
