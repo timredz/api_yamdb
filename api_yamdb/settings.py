@@ -25,16 +25,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'rest_framework',
     'api',
     'corsheaders',
     'django_filters',
+=======
+>>>>>>> f8937a04ea5ce98be5ddb4390984759bebb0b5b1
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+<<<<<<< HEAD
     'corsheaders.middleware.CorsMiddleware',
+=======
+>>>>>>> f8937a04ea5ce98be5ddb4390984759bebb0b5b1
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -80,6 +86,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
+<<<<<<< HEAD
         'NAME': (
             'django.contrib.auth.password_validation.'
             'UserAttributeSimilarityValidator'
@@ -102,6 +109,18 @@ AUTH_PASSWORD_VALIDATORS = [
             'django.contrib.auth.password_validation.'
             'NumericPasswordValidator'
         ),
+=======
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+>>>>>>> f8937a04ea5ce98be5ddb4390984759bebb0b5b1
     },
 ]
 
@@ -126,6 +145,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/'),)
+<<<<<<< HEAD
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -159,3 +179,5 @@ CORS_URLS_REGEX = r'^/api/.*$'
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
 }
+=======
+>>>>>>> f8937a04ea5ce98be5ddb4390984759bebb0b5b1
